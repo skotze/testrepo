@@ -15,6 +15,6 @@ libraryDependencies ++= Seq(
 
 resolvers += Resolver.url("Typesafe Ivy releases", url("https://repo.typesafe.com/typesafe/ivy-releases"))(Resolver.ivyStylePatterns)
 
-target := /target
+target := "/target"
 
 fork in run := true
