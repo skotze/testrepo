@@ -31,18 +31,11 @@ RUN apt-get install $APT_OPTS git
 RUN apt-get $APT_OPTS install apt-transport-https
 
 
-RUN \  
-  wget -qO- https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
-  echo "deb https://deb.nodesource.com/$NODE_JS_VERSION $NODE_JS_DISTRO main" >> /etc/apt/sources.list.d/nodesource.list && \
-  echo "deb-src https://deb.nodesource.com/$NODE_JS_VERSION $NODE_JS_DISTRO main" >> /etc/apt/sources.list.d/nodesource.list && \
-  apt-get update && \
-  apt-get $APT_OPTS install nodejs
-
 # Install node.js (for faster compilation) does not work for Yakkity.
-##RUN \
-##  wget -qO- https://deb.nodesource.com/setup_6.x > /setup_6.x && \
-##  bash /setup_6.x && \
-##  apt-get install $APT_OPTS nodejs
+RUN \
+  wget -qO- https://deb.nodesource.com/setup_6.x > /setup_6.x && \
+  bash /setup_6.x && \
+  apt-get install $APT_OPTS nodejs
 
 
 VOLUME /ivy_cache
