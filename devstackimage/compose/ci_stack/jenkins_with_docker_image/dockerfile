@@ -1,0 +1,20 @@
+FROM jenkins:2.7.2
+MAINTAINER Stephan Kotze
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+USER root
+
+RUN \
+	apt-get update && \
+	apt-get install -qqy curl apt-transport-https sudo && \
+	wget -qO- https://test.docker.com/builds/Linux/x86_64/docker-1.11.0.tgz > docker-1.11.0.tgz && \
+	tar -xvzf docker-1.11.0.tgz && \
+ 	mv docker/* /usr/bin/ && \
+    rm -f docker-1.11.0.tgz && \
+	echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
+
+USER jenkins
+
+
+
