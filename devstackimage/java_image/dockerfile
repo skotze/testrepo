@@ -1,10 +1,10 @@
-FROM ubuntu:xenial
+FROM ubuntu:14.04
 MAINTAINER Stephan Kotze
 
 RUN \
   TERM="xterm-256color" && \
   APT_OPTS="-y -o apt::install-recomme‌​nds=false -o apt::install-suggests=false" && \
-  echo "deb http://archive.ubuntu.com/ubuntu/ yakkety main universe" >> /etc/apt/sources.list && \
+  echo "deb http://archive.ubuntu.com/ubuntu/ trusty main universe" >> /etc/apt/sources.list && \
   apt-get update && \
   apt-get install $APT_OPTS software-properties-common 
 
