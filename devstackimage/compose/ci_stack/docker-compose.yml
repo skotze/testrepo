@@ -3,7 +3,7 @@ services:
   gitlab:  
    container_name: gitlab
    image: gitlab/gitlab-ce:8.10.5-ce.0
-   hostname: gitlab
+   hostname: ${GITLAB_CONTAINER_HOSTNAME}
    environment:
      GITLAB_OMNIBUS_CONFIG: |
        external_url 'http://127.0.0.1:8050'
@@ -18,7 +18,7 @@ services:
   registry:  
    container_name: registry
    image: registry:2.5.0
-   hostname: registry
+   hostname: ${REGISTRY_CONTAINER_HOSTNAME}
    ports:
     - "5000:5000"
    volumes_from:
@@ -28,14 +28,16 @@ services:
   jenkins:  
    container_name: jenkins
    build: jenkins_with_docker_image
-   hostname: jenkins
+   hostname: ${JENKINS_CONTAINER_HOSTNAME}
    ports:
     - "8080:8080"
     - "50000:50000"
    volumes_from:
     - ci_stack_volume
+   environment:
+    - REGISTRY_CONTAINER_HOSTNAME=${REGISTRY_CONTAINER_HOSTNAME}
+    - DOCKERHOST_HOSTNAME=${DOCKERHOST_HOSTNAME}
    restart: always
-   privileged: true
 
   ci_stack_volume:
     image: jenkins:2.7.2
@@ -44,12 +46,5 @@ services:
     - ${VOLUMES_DIR}/gitlab/config:/etc/gitlab
     - ${VOLUMES_DIR}/logs:/var/log/gitlab
     - ${VOLUMES_DIR}/gitlab/data:/var/opt/gitlab
-    - ${VOLUMES_DIR}/registry/var/lib/registry:/var/lib/registry
     - ${VOLUMES_DIR}/jenkins/var/jenkins_home:/var/jenkins_home
     - /var/run/docker.sock:/var/run/docker.sock
-
-
-
-
-
-  #docker run -p 8080:8080 -p 50000:50000 -v /your/home:/var/jenkins_home jenkins
