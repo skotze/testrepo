@@ -23,13 +23,13 @@ public class Application extends Controller {
     @Transactional
     public Result addPerson() {
         Person person = formFactory.form(Person.class).bindFromRequest().get();
-        JPA.em().persist(person);
+        //JPA.em().persist(person);
         return redirect(routes.Application.index());
     }
 
     @Transactional(readOnly = true)
     public Result getPersons() {
-        List<Person> persons = (List<Person>) JPA.em().createQuery("select p from Person p").getResultList();
-        return ok(toJson(persons));
+        //List<Person> persons = (List<Person>) JPA.em().createQuery("select p from Person p").getResultList();
+        return ok();
     }
 }
