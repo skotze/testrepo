@@ -23,7 +23,7 @@ public class Application extends Controller {
     @Transactional
     public Result addPerson() {
         Person person = formFactory.form(Person.class).bindFromRequest().get();
-        //JPA.em().persist(person);
+        JPA.em().persist(person);
         return redirect(routes.Application.index());
     }
 
