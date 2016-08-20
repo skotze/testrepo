@@ -9,3 +9,4 @@ target
 
 *.log
 .sbtserver/master.log.01
+devstackimage/release_image/play-java-intro-1.0-SNAPSHOT.tgz

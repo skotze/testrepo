@@ -37,9 +37,11 @@ services:
    environment:
     - REGISTRY_CONTAINER_HOSTNAME=${REGISTRY_CONTAINER_HOSTNAME}
     - DOCKERHOST_HOSTNAME=${DOCKERHOST_HOSTNAME}
+    - CI_STACK_VOLUME_NAME=${CI_STACK_VOLUME_NAME}
    restart: always
 
   ci_stack_volume:
+    container_name: ${CI_STACK_VOLUME_NAME}
     image: jenkins:2.7.2
     entrypoint: "true"
     volumes:
