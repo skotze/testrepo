@@ -10,7 +10,7 @@ libraryDependencies ++= Seq(
   // If you enable PlayEbean plugin you must remove these
   // JPA dependencies to avoid conflicts.
   javaJpa,
-  "org.hibernate" % "hibernate-entitymanager" % "4.3.7.Final"
+  "org.hibernate" % "hibernate-entitymanager" % "5.0.0.Final"
 )
 
 resolvers += Resolver.url("Typesafe Ivy releases", url("https://repo.typesafe.com/typesafe/ivy-releases"))(Resolver.ivyStylePatterns)
