@@ -7,7 +7,8 @@ ENV \
   NODE_JS_VERSION="node_6.x" \
   NODE_JS_DISTRO="xenial" \
   TERM="xterm-256color" \
-  APT_OPTS="-y -o apt::install-recomme‌​nds=false -o apt::install-suggests=false"
+  APT_OPTS="-y -o apt::install-recommends=false -o apt::install-suggests=false" \
+  TARGET_DIRECTORY="/target"
 
 # Install Scala
 RUN \  
@@ -40,10 +41,6 @@ RUN \
 
 VOLUME /ivy_cache
 VOLUME /target
-
-#runtime env
-ENV GIT_REPO testrepo
-ENV GIT_URL https://github.com/skotze/
 
 # install entrypoint script
 COPY entry.sh /bin/entry.sh

@@ -6,9 +6,12 @@ ENV TERM xterm-256color
 COPY play-java-intro-1.0-SNAPSHOT.tgz .
 
 RUN \
-	tar -xzf play-java-intro-1.0-SNAPSHOT.tgz && \
-	mv play-java-intro-1.0-SNAPSHOT play-java-intro && \
-	rm -f play-java-intro-1.0-SNAPSHOT.tgz
+	tar -xzf play-java-intro-1.0-SNAPSHOT.tgz 
+#	&& \
+#	mv play-java-intro-1.0-SNAPSHOT play-java-intro && \
+#	rm -f play-java-intro-1.0-SNAPSHOT.tgz
+
+RUN ls
 
 # install entrypoint script
 COPY entry.sh /bin/entry.sh
