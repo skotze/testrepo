@@ -45,9 +45,11 @@ services:
     image: jenkins:2.7.2
     entrypoint: "true"
     volumes:
-    - ${VOLUMES_DIR}/gitlab/config:/etc/gitlab
-    - ${VOLUMES_DIR}/logs:/var/log/gitlab
-    - ${VOLUMES_DIR}/gitlab/data:/var/opt/gitlab
+    - ${VOLUMES_DIR}/gitlab/etc/gitlab:/etc/gitlab
+    - ${VOLUMES_DIR}/gitlab/var/log/gitlab:/var/log/gitlab
+    - ${VOLUMES_DIR}/gitlab/var/opt/gitlab:/var/opt/gitlab
+    - ${VOLUMES_DIR}/registry/var/lib/registry:/var/lib/registry
+    - ${VOLUMES_DIR}/registry/etc/docker/registry/:/etc/docker/registry/
     - ${VOLUMES_DIR}/jenkins/var/jenkins_home:/var/jenkins_home
     - ${VOLUMES_DIR}/my_ivy_cache:/ivy_cache
     - ${VOLUMES_DIR}/target:/target
