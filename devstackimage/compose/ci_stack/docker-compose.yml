@@ -2,7 +2,7 @@ version: '2'
 services:
   gitlab:  
    container_name: gitlab
-   image: gitlab/gitlab-ce:8.10.5-ce.0
+   image: gitlab_with_docker_registry_image
    hostname: ${GITLAB_CONTAINER_HOSTNAME}
    environment:
      GITLAB_OMNIBUS_CONFIG: |
@@ -11,19 +11,31 @@ services:
    ports:
     - "8050:8050"
     - "522:22"
+    - "443:443"
+   expose:
+    - "433"
+   networks:
+     ci_stack_net:
+        aliases: 
+          - ${GITLAB_CONTAINER_HOSTNAME}
    volumes_from:
     - ci_stack_volume
+   environment:
+    - REGISTRY_CONTAINER_HOSTNAME=${REGISTRY_CONTAINER_HOSTNAME}
+    - DOCKERHOST_HOSTNAME=${DOCKERHOST_HOSTNAME}
+    - CI_STACK_VOLUME_NAME=${CI_STACK_VOLUME_NAME}
+    - GITLAB_CONTAINER_HOSTNAME=${CI_STACK_VOLUME_NAME}
    restart: always
 
-  registry:  
-   container_name: registry
-   image: registry:2.5.0
-   hostname: ${REGISTRY_CONTAINER_HOSTNAME}
-   ports:
-    - "5000:5000"
-   volumes_from:
-    - ci_stack_volume
-   restart: always
+  #registry:  
+  # container_name: registry
+  # image: registry:2.5.0
+  # hostname: ${REGISTRY_CONTAINER_HOSTNAME}
+  # ports:
+  #  - "5000:5000"
+  # volumes_from:
+  #  - ci_stack_volume
+  # restart: always
 
   jenkins:  
    container_name: jenkins
@@ -32,12 +44,17 @@ services:
    ports:
     - "8080:8080"
     - "50000:50000"
+   networks:
+     ci_stack_net:
+        aliases: 
+          - ${JENKINS_CONTAINER_HOSTNAME}
    volumes_from:
     - ci_stack_volume
    environment:
     - REGISTRY_CONTAINER_HOSTNAME=${REGISTRY_CONTAINER_HOSTNAME}
     - DOCKERHOST_HOSTNAME=${DOCKERHOST_HOSTNAME}
     - CI_STACK_VOLUME_NAME=${CI_STACK_VOLUME_NAME}
+    - GITLAB_CONTAINER_HOSTNAME=${CI_STACK_VOLUME_NAME}
    restart: always
 
   ci_stack_volume:
@@ -54,3 +71,6 @@ services:
     - ${VOLUMES_DIR}/my_ivy_cache:/ivy_cache
     - ${VOLUMES_DIR}/target:/target
     - /var/run/docker.sock:/var/run/docker.sock
+
+networks:
+  ci_stack_net:

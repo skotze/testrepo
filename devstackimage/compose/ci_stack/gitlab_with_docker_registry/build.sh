@@ -1,0 +1,2 @@
+docker build -t gitlab_with_docker_registry_image .
+docker tag gitlab_with_docker_registry_image gitlab_with_docker_registry_image:latest
