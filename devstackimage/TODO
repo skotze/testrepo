@@ -1,0 +1,2 @@
+* add scripts to jenkins image to make managing docker build integration easier.
+* connect gitlab instance with docker registry
