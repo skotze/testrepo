@@ -1,4 +1,5 @@
 #sudo is required to start containers by the "jenkins" user
+set -x
 sudo docker run -i --rm \
  --volumes-from $CI_STACK_VOLUME_NAME \
  --env TARGET_DIRECTORY="$WORKSPACE/target" \

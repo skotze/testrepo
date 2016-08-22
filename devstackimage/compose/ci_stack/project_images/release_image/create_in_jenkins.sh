@@ -3,7 +3,7 @@
 set -x
 sudo docker pull $DOCKERHOST_HOSTNAME:$REGISTRY_PORT/java8_base:latest
 sudo docker tag $DOCKERHOST_HOSTNAME:$REGISTRY_PORT/java8_base:latest java8_base:latest
-cp $1/$2 .
+cp $1/$2.tgz .
 
 sudo docker build --build-arg archive=$2 -t $3 .
 
