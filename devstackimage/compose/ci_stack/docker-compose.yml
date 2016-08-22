@@ -9,15 +9,13 @@ services:
        external_url 'http://127.0.0.1:8050'
        gitlab_rails['gitlab_shell_ssh_port'] = 522
    ports:
-    - "8050:8050"
+    - "8050:80"
     - "522:22"
-    - "443:443"
-   expose:
-    - "433"
+    - "${REGISTRY_PORT}:443"
    networks:
-     ci_stack_net:
-        aliases: 
-          - ${GITLAB_CONTAINER_HOSTNAME}
+    ci_stack_net:
+       aliases: 
+         - ${JENKINS_CONTAINER_HOSTNAME}
    volumes_from:
     - ci_stack_volume
    environment:
@@ -25,17 +23,8 @@ services:
     - DOCKERHOST_HOSTNAME=${DOCKERHOST_HOSTNAME}
     - CI_STACK_VOLUME_NAME=${CI_STACK_VOLUME_NAME}
     - GITLAB_CONTAINER_HOSTNAME=${CI_STACK_VOLUME_NAME}
+    - REGISTRY_PORT=${REGISTRY_PORT}
    restart: always
-
-  #registry:  
-  # container_name: registry
-  # image: registry:2.5.0
-  # hostname: ${REGISTRY_CONTAINER_HOSTNAME}
-  # ports:
-  #  - "5000:5000"
-  # volumes_from:
-  #  - ci_stack_volume
-  # restart: always
 
   jenkins:  
    container_name: jenkins
@@ -45,9 +34,9 @@ services:
     - "8080:8080"
     - "50000:50000"
    networks:
-     ci_stack_net:
-        aliases: 
-          - ${JENKINS_CONTAINER_HOSTNAME}
+    ci_stack_net:
+       aliases: 
+         - ${JENKINS_CONTAINER_HOSTNAME}
    volumes_from:
     - ci_stack_volume
    environment:
@@ -65,8 +54,6 @@ services:
     - ${VOLUMES_DIR}/gitlab/etc/gitlab:/etc/gitlab
     - ${VOLUMES_DIR}/gitlab/var/log/gitlab:/var/log/gitlab
     - ${VOLUMES_DIR}/gitlab/var/opt/gitlab:/var/opt/gitlab
-    - ${VOLUMES_DIR}/registry/var/lib/registry:/var/lib/registry
-    - ${VOLUMES_DIR}/registry/etc/docker/registry/:/etc/docker/registry/
     - ${VOLUMES_DIR}/jenkins/var/jenkins_home:/var/jenkins_home
     - ${VOLUMES_DIR}/my_ivy_cache:/ivy_cache
     - ${VOLUMES_DIR}/target:/target

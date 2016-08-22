@@ -9,8 +9,8 @@ RUN \
 
 RUN \
 	echo "registry_nginx['ssl_certificate'] = \"/certificates/server.crt\"" >> /etc/gitlab/gitlab.rb && \
-	echo "registry_nginx['ssl_certificate_key'] = \"/certificates/server.key\"" >> /etc/gitlab/gitlab.rb $$ \
-	echo "registry_external_url 'https://set_me_to_docker_hostname'" /etc/gitlab/gitlab.rb >> /etc/gitlab/gitlab.rb
+	echo "registry_nginx['ssl_certificate_key'] = \"/certificates/server.key\"" >> /etc/gitlab/gitlab.rb 
+#	echo "registry_external_url 'https://set_me_to_docker_hostname'" /etc/gitlab/gitlab.rb >> /etc/gitlab/gitlab.rb
 
 # install entrypoint script
 COPY entry.sh /bin/entry.sh

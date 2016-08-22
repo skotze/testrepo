@@ -3,6 +3,7 @@ export JENKINS_CONTAINER_HOSTNAME=cijenkins
 export REGISTRY_CONTAINER_HOSTNAME=ciregistry
 export GITLAB_CONTAINER_HOSTNAME=cigitlab
 export DOCKERHOST_HOSTNAME=$(hostname)
+export REGISTRY_PORT=443
 export CI_STACK_VOLUME_NAME=ci_stack_volume
 
 mkdir -p $VOLUMES_DIR/jenkins/var/jenkins_home
