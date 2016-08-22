@@ -6,7 +6,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 USER root
 
 RUN \
-	DOCKER_VERSION="1.12.1"
+	DOCKER_VERSION="1.12.1" && \
 	apt-get update && \
 	apt-get install -qqy curl apt-transport-https sudo && \
 	wget -qO- https://test.docker.com/builds/Linux/x86_64/docker-$DOCKER_VERSION.tgz > docker-$DOCKER_VERSION.tgz && \
