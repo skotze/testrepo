@@ -2,7 +2,7 @@ version: '2'
 services:
   gitlab:  
    container_name: gitlab
-   image: gitlab_with_docker_registry_image
+   build: gitlab_with_docker_registry
    hostname: ${GITLAB_CONTAINER_HOSTNAME}
    environment:
      GITLAB_OMNIBUS_CONFIG: |
