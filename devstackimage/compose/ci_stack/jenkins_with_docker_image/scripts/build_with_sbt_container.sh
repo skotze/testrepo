@@ -4,7 +4,7 @@ sudo docker run -i --rm \
  --env TARGET_DIRECTORY="$WORKSPACE/target" \
  --env GIT_URL="https://github.com/skotze/" \
  --env GIT_REPO="testrepo" \
- --name build_in_jenkins_image build_in_jenkins 
+ --name build_in_jenkins-$BUILD_TAG $DOCKERHOST_HOSTNAME:$REGISTRY_PORT/build_in_jenkins_image:latest
 
 #sudo docker pull ubuntu
 #sudo docker tag ubuntu $DOCKERHOST_HOSTNAME:5000/helloworld:$BUILD_NUMBER
