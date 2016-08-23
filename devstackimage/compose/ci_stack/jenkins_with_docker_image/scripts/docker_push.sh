@@ -1,1 +1,0 @@
-sudo docker push $DOCKERHOST_HOSTNAME:$REGISTRY_PORT/$1
